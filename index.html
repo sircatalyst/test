@@ -72,14 +72,15 @@
 			const fullName = document.getElementById('fullName').value;
 			const steps = document.getElementById('steps').value;
 			const iterationNumber = document.getElementById('iterationNumber').value;
-			console.log("fullName", fullName);
+
 			db.push({
 				participantId,
 				fullName,
 				steps,
 				iterationNumber
 			});
-			console.log("db", db);
+
+
 			if (top10.length < 10) {
 				top10.push({
 					participantId,
@@ -104,10 +105,8 @@
 					});
 				}
 			}
-			console.log("top10", top10);
 		}
-
-	
+		//Not enough time, thank you
 	</script>
 
 </body>
