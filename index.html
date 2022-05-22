@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width, initial-scale=1.0">
+	<!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+	<title>Document</title>
+</head>
+<body>
+	<form>
+		<div class="row g-3 align-items-center">
+			<div class="col-auto">
+			  <label for="participantId" class="col-form-label">Participant ID</label>
+			</div>
+			<div class="col-auto">
+			  <input type="text" id="participantId" class="form-control" aria-describedby="yourUniqueParticipantID" name="participantId">
+			</div>
+			<div class="col-auto">
+			  <span id="yourUniqueParticipantID" class="form-text">
+				Your unique participant ID
+			  </span>
+		</div>
+		<div class="row g-3 align-items-center">
+			<div class="col-auto">
+			  <label for="fullName" class="col-form-label">Full Name</label>
+			</div>
+			<div class="col-auto">
+			  <input type="text" id="fullName" class="form-control" aria-describedby="yourFullName" name="fullName">
+			</div>
+			<div class="col-auto">
+			  <span id="yourFullName" class="form-text">
+				Your Full Name
+			  </span>
+		</div>
+		<div class="row g-3 align-items-center">
+			<div class="col-auto">
+			  <label for="steps" class="col-form-label">Number of Steps taken</label>
+			</div>
+			<div class="col-auto">
+			  <input type="number" id="steps" class="form-control" aria-describedby="numberOfStepsTaken"  name="steps">
+			</div>
+			<div class="col-auto">
+			  <span id="numberOfStepsTaken" class="form-text">
+				Number of Steps taken
+			  </span>
+		</div>
+		<div class="row g-3 align-items-center">
+			<div class="col-auto">
+			  <label for="iterationNumber" class="col-form-label">Iteration Number</label>
+			</div>
+			<div class="col-auto">
+			  <input type="number" id="iterationNumber" class="form-control" aria-describedby="iterationNumber"  name="iterationNumber" min="1" max="4">
+			</div>
+			<div class="col-auto">
+			  <span id="iterationNumber" class="form-text">
+				iteration Number
+			  </span>
+		</div>
+		<button class="btn btn-primary" type="button" onclick="submitForm()">Submit</button>
+	</form>
+
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<script>
+		let db = [];
+		let top10 = [];
+		function submitForm() {
+			const participantId = document.getElementById('participantId').value;
+			const fullName = document.getElementById('fullName').value;
+			const steps = document.getElementById('steps').value;
+			const iterationNumber = document.getElementById('iterationNumber').value;
+			console.log("fullName", fullName);
+			db.push({
+				participantId,
+				fullName,
+				steps,
+				iterationNumber
+			});
+			console.log("db", db);
+			if (top10.length < 10) {
+				top10.push({
+					participantId,
+					fullName,
+					steps,
+					iterationNumber
+				});
+			}
+			for (let index = 0; index < db.length; index++) {
+				const participant = db[index];
+				if (top10.length > 0) {
+					top10.map(item => {
+						if (participant.steps > item.steps) {
+							top10.push({
+								participantId: participant.participantId,
+								fullName: participant.fullName,
+								steps: participant.steps,
+								iterationNumber: participant.iterationNumber
+							});
+						}
+						return;
+					});
+				}
+			}
+			console.log("top10", top10);
+		}
+
+	
+	</script>
+
+</body>
+</html>
